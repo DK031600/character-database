@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CHARACTER DATABASE</title>
+<style>
+:root{
+  --bg:#f3f3f1; --panel:#fff; --text:#222; --muted:#777;
+  --line:#d8d8d8; --accent:#333; --quote:#fafafa;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,"Noto Sans KR",sans-serif;line-height:1.75}
+body.serif{font-family:Georgia,"Noto Serif KR",serif}
+body.dark{--bg:#171717;--panel:#222;--text:#eee;--muted:#aaa;--line:#444;--accent:#fff;--quote:#292929}
+body.small{font-size:14px} body.large{font-size:18px}
+.toolbar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);padding:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+button{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:6px 11px;border-radius:5px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+.wrap{max-width:860px;margin:38px auto;padding:0 18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:26px;margin-bottom:22px;box-shadow:0 2px 10px #0000000a}
+h1{font-size:2rem;line-height:1.25;margin:0 0 8px}
+h2{font-size:1.15rem;margin:0 0 15px;border-bottom:2px solid var(--line);padding-bottom:8px}
+h3{font-size:1rem;margin:20px 0 7px}
+.meta{color:var(--muted);font-size:.9rem}
+.hero{display:grid;grid-template-columns:190px 1fr;gap:25px;align-items:start}
+.avatar{width:190px;height:250px;object-fit:cover;border-radius:5px;background:#ddd}
+.tag{display:inline-block;border:1px solid var(--line);padding:2px 8px;border-radius:99px;margin:2px;font-size:.8rem}
+.quote{padding:18px 20px;background:var(--quote);border-left:4px solid var(--accent);font-style:italic;margin:20px 0}
+.profile{display:grid;grid-template-columns:150px 1fr;border-top:1px solid var(--line)}
+.profile div{padding:7px 4px;border-bottom:1px solid var(--line)}
+.profile .key{color:var(--muted)}
+.gallery{position:relative}
+.gallery img{width:100%;max-height:560px;object-fit:contain;background:#111;border-radius:5px}
+.gallery-nav{display:flex;justify-content:space-between;margin-top:8px}
+.items{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.item{border:1px solid var(--line);border-radius:7px;padding:15px}
+.item img{width:100%;height:180px;object-fit:cover;border-radius:4px;margin-bottom:8px}
+.footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
+@media(max-width:650px){
+ .hero{grid-template-columns:1fr}.avatar{width:150px;height:200px}
+ .profile{grid-template-columns:110px 1fr}.items{grid-template-columns:1fr}
+ .wrap{margin-top:20px}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <button onclick="setFont('sans')">고딕</button>
+  <button onclick="setFont('serif')">명조</button>
+  <button onclick="setTheme('light')">라이트</button>
+  <button onclick="setTheme('dark')">다크</button>
+  <button onclick="setSize('small')">작게</button>
+  <button onclick="setSize('medium')">보통</button>
+  <button onclick="setSize('large')">크게</button>
+</div>
+
+<main class="wrap">
+  <section class="card hero">
+    <img class="avatar" src="https://placehold.co/380x500?text=CHARACTER" alt="캐릭터 이미지">
+    <div>
+      <div class="meta">CHARACTERS</div>
+      <h1>캐릭터 이름</h1>
+      <p class="meta">読み：キャラクター・ネーム</p>
+      <span class="tag">등장작품</span>
+      <span class="tag">주요 인물</span>
+      <p><b>등장</b> 작품명<br><b>상대</b> 상대 캐릭터</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>IMAGE</h2>
+    <div class="gallery">
+      <img id="galleryImage" src="https://placehold.co/900x600?text=IMAGE+01" alt="갤러리 이미지">
+      <div class="gallery-nav">
+        <button onclick="prevImage()">＜</button>
+        <span id="counter" class="meta">1 / 3</span>
+        <button onclick="nextImage()">＞</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="quote">「여기에 캐릭터의 대표 대사를 입력하세요.」</div>
+    <h2>■ PROFILE</h2>
+    <div class="profile">
+      <div class="key">종족</div><div>인간</div>
+      <div class="key">성별</div><div>남성</div>
+      <div class="key">나이</div><div>불명</div>
+      <div class="key">직업・신분</div><div>기자</div>
+      <div class="key">가족</div><div>불명</div>
+      <div class="key">소속</div><div>조직명</div>
+    </div>
+
+    <h2 style="margin-top:28px">■ DESCRIPTION</h2>
+    <p>여기에 캐릭터의 상세 설명을 작성하세요.</p>
+    <p>문단을 원하는 만큼 추가할 수 있습니다. 성장 과정, 성격, 인간관계, 작품 내 행적 등을 자유롭게 기록하면 됩니다.</p>
+
+    <h2 style="margin-top:28px">■ SPECIAL</h2>
+    <p><b>변신 / 필살기 / 능력</b></p>
+    <p>능력에 대한 설명을 작성하세요.</p>
+  </section>
+
+  <section class="card">
+    <h2>RELATED ITEMS</h2>
+    <div class="items">
+      <article class="item">
+        <img src="https://placehold.co/700x400?text=ITEM+01" alt="">
+        <h3>아이템 이름</h3>
+        <p class="meta">아이템 설명</p>
+      </article>
+      <article class="item">
+        <img src="https://placehold.co/700x400?text=ITEM+02" alt="">
+        <h3>아이템 이름</h3>
+        <p class="meta">아이템 설명</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="footer">CHARACTER DATABASE · 개인 설정 자료실</div>
+</main>
+
+<script>
+const images=[
+ "https://placehold.co/900x600?text=IMAGE+01",
+ "https://placehold.co/900x600?text=IMAGE+02",
+ "https://placehold.co/900x600?text=IMAGE+03"
+];
+let index=0;
+function renderGallery(){
+ document.getElementById("galleryImage").src=images[index];
+ document.getElementById("counter").textContent=`${index+1} / ${images.length}`;
+}
+function nextImage(){index=(index+1)%images.length;renderGallery()}
+function prevImage(){index=(index-1+images.length)%images.length;renderGallery()}
+function setFont(v){document.body.classList.toggle("serif",v==="serif")}
+function setTheme(v){document.body.classList.toggle("dark",v==="dark")}
+function setSize(v){
+ document.body.classList.remove("small","large");
+ if(v!=="medium") document.body.classList.add(v);
+}
+</script>
+</body>
+</html>
