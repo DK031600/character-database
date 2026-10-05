@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CHARACTER DATABASE</title>
+<style>
+:root{
+  --bg:#f3f3f1;--panel:#fff;--text:#222;--muted:#777;
+  --line:#d8d8d8;--accent:#333;--quote:#fafafa;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,"Noto Sans KR",sans-serif;line-height:1.75}
+button{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:6px 11px;border-radius:5px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+.wrap{max-width:860px;margin:38px auto;padding:0 18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:26px;margin-bottom:22px;box-shadow:0 2px 10px #0000000a}
+h1{font-size:2rem;line-height:1.25;margin:0 0 8px}
+h2{font-size:1.15rem;margin:0 0 15px;border-bottom:2px solid var(--line);padding-bottom:8px}
+h3{font-size:1rem;margin:20px 0 7px}
+.meta{color:var(--muted);font-size:.9rem}
+.hero{display:grid;grid-template-columns:190px 1fr;gap:25px;align-items:start}
+.avatar{width:190px;height:250px;object-fit:cover;border-radius:5px;background:#ddd}
+.tag{display:inline-block;border:1px solid var(--line);padding:2px 8px;border-radius:99px;margin:2px;font-size:.8rem}
+.quote{padding:18px 20px;background:var(--quote);border-left:4px solid var(--accent);font-style:italic;margin:20px 0}
+.profile{display:grid;grid-template-columns:150px 1fr;border-top:1px solid var(--line)}
+.profile div{padding:7px 4px;border-bottom:1px solid var(--line)}
+.profile .key{color:var(--muted)}
+.gallery img{width:100%;max-height:560px;object-fit:contain;background:#111;border-radius:5px}
+.gallery-nav{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.items{display:grid;grid-template-columns:1fr;gap:14px}
+.item{border:1px solid var(--line);border-radius:7px;padding:15px}
+.item img{width:100%;height:260px;object-fit:cover;border-radius:4px;margin-bottom:8px}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gallery-grid img{width:100%;height:180px;object-fit:cover;border-radius:5px;background:#ddd;cursor:pointer}
+.gallery-grid img:hover{opacity:.85}
+.lightbox{display:none;position:fixed;inset:0;background:#000d;z-index:100;align-items:center;justify-content:center;padding:30px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;object-fit:contain}
+.lightbox button{position:absolute;top:20px;right:20px}
+.footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
+@media(max-width:650px){
+ .hero{grid-template-columns:1fr}.avatar{width:150px;height:200px}
+ .profile{grid-template-columns:120px 1fr}.gallery-grid{grid-template-columns:repeat(2,1fr)}
+ .wrap{margin-top:20px}
+}
+</style>
+</head>
+<body>
+
+
+<main class="wrap">
+
+<section class="card hero">
+  <img class="avatar" src="https://placehold.co/380x500?text=CHARACTER" alt="캐릭터 이미지">
+  <div>
+    <div class="meta">CHARACTERS</div>
+    <h1>캐릭터 이름</h1>
+    <p class="meta">読み：キャラクター・ネーム</p>
+    <span class="tag">등장작품</span>
+  </div>
+</section>
+
+<section class="card">
+  <h2>IMAGE</h2>
+  <div class="gallery">
+    <img id="galleryImage" src="https://placehold.co/900x600?text=IMAGE+01" alt="메인 이미지">
+    <div class="gallery-nav">
+      <button onclick="prevImage()">＜</button>
+      <span id="counter" class="meta">1 / 3</span>
+      <button onclick="nextImage()">＞</button>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="quote">「여기에 캐릭터의 대표 대사를 입력하세요.」</div>
+
+  <h2>■ 프로필</h2>
+  <div class="profile">
+    <div class="key">이름</div><div>캐릭터 이름</div>
+    <div class="key">젠더</div><div>남성</div>
+    <div class="key">나이</div><div>불명</div>
+    <div class="key">출신</div><div>출신 지역 / 국가</div>
+    <div class="key">변신 타입</div><div>개조인간 / 강화복 / 기타</div>
+    <div class="key">変身体</div><div>변신체 이름</div>
+    <div class="key">키 / 몸무게</div><div>000 cm / 00 kg</div>
+    <div class="key">생년월일</div><div>0000년 00월 00일</div>
+    <div class="key">소속</div><div>조직명</div>
+    <div class="key">가족</div><div>가족 관계</div>
+    <div class="key">벨트</div><div>벨트 이름</div>
+    <div class="key">바이크</div><div>바이크 이름</div>
+  </div>
+
+  <h2 style="margin-top:28px">■ 변신체</h2>
+  <p><b>변신체 이름</b></p>
+  <p>변신체에 대한 설명을 작성하세요. 외형, 능력, 무장, 변신 방법 등을 자유롭게 기록할 수 있습니다.</p>
+
+  <h2 style="margin-top:28px">■ DESCRIPTION</h2>
+  <p>여기에 캐릭터의 상세 설명을 작성하세요.</p>
+  <p>성장 과정, 성격, 인간관계, 작품 내 행적 등을 자유롭게 기록하면 됩니다.</p>
+
+  <h2 style="margin-top:28px">■ ECT.</h2>
+  <p><b>필살기 / 능력 / 기타 설정</b></p>
+  <p>추가로 기록할 내용을 작성하세요.</p>
+</section>
+
+<section class="card">
+  <h2>벨트</h2>
+  <article class="item">
+    <img src="https://placehold.co/700x400?text=BELT" alt="벨트 이미지">
+    <h3>벨트 이름</h3>
+    <p class="meta">벨트에 대한 설명</p>
+  </article>
+</section>
+
+<section class="card">
+  <h2>갤러리</h2>
+  <div class="gallery-grid" id="galleryGrid">
+    <img src="https://placehold.co/700x500?text=GALLERY+01" alt="갤러리 1" onclick="openLightbox(this.src)">
+    <img src="https://placehold.co/700x500?text=GALLERY+02" alt="갤러리 2" onclick="openLightbox(this.src)">
+    <img src="https://placehold.co/700x500?text=GALLERY+03" alt="갤러리 3" onclick="openLightbox(this.src)">
+    <img src="https://placehold.co/700x500?text=GALLERY+04" alt="갤러리 4" onclick="openLightbox(this.src)">
+    <img src="https://placehold.co/700x500?text=GALLERY+05" alt="갤러리 5" onclick="openLightbox(this.src)">
+    <img src="https://placehold.co/700x500?text=GALLERY+06" alt="갤러리 6" onclick="openLightbox(this.src)">
+  </div>
+</section>
+
+<div class="footer">CHARACTER DATABASE · 개인 설정 자료실</div>
+</main>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button onclick="closeLightbox()">닫기</button>
+  <img id="lightboxImage" src="" alt="확대 이미지" onclick="event.stopPropagation()">
+</div>
+
+<script>
+const images=[
+ "https://placehold.co/900x600?text=IMAGE+01",
+ "https://placehold.co/900x600?text=IMAGE+02",
+ "https://placehold.co/900x600?text=IMAGE+03"
+];
+let index=0;
+
+function renderGallery(){
+ document.getElementById("galleryImage").src=images[index];
+ document.getElementById("counter").textContent=`${index+1} / ${images.length}`;
+}
+function nextImage(){index=(index+1)%images.length;renderGallery()}
+function prevImage(){index=(index-1+images.length)%images.length;renderGallery()}
+function openLightbox(src){
+ document.getElementById("lightboxImage").src=src;
+ document.getElementById("lightbox").classList.add("open");
+}
+function closeLightbox(){
+ document.getElementById("lightbox").classList.remove("open");
+}
+</script>
+</body>
+</html>
